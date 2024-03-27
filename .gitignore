@@ -15,6 +15,7 @@ _deps
 /.idea
 /debug
 /release
+/build
 
 # Test package
 /test_package/build
