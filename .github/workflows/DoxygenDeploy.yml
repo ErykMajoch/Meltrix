@@ -1,0 +1,31 @@
+name: Deploy Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Doxygen
+      run: sudo apt-get install -y doxygen
+
+    - name: Generate Doxygen Documentation
+      run: doxygen docs/Doxyfile
+
+    - name: Copy custom CSS
+      run: |
+        mkdir -p html
+        cp -r docs/doxygen-awesome-css html/doxygen-awesome-css
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./html
+        publish_branch: gh-pages
