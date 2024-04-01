@@ -10,17 +10,12 @@
 A simple and templated C++ Matrix library 
 </pre>
 
-![Static Badge](https://img.shields.io/badge/Language-C%2B%2B%2017-purple)
-![GitHub](https://img.shields.io/github/license/ErykMajoch/Meltrix?style=flat&label=License&color=purple) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ErykMajoch/Meltrix?label=Library%20Size&color=purple)
-
-[//]: # (![GitHub Workflow Status &#40;with event&#41;]&#40;https://img.shields.io/github/actions/workflow/status/ErykMajoch/Meltrix/cmake-multi-platform.yml?label=Build&#41;)
+![Static Badge](https://img.shields.io/badge/C%2B%2B-17-purple?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/ErykMajoch/Meltrix?style=flat-square&label=License&color=purple)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ErykMajoch/Meltrix?style=flat-square&label=Library%20Size&color=purple)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ErykMajoch/Meltrix/.github%2Fworkflows%2FCMakeBuild.yml?style=flat-square&label=Build)
 
 </div>
-
-## Introduction
-
-Meltrix is a library written in C++ that provides tools for matrix operations. It is designed to be easy to use and to
-provide a wide range of functionalities, with the ability to extend it as the user pleases.
 
 ## Code Examples
 
