@@ -17,8 +17,8 @@ jobs:
 
     - name: Copy custom CSS
       run: |
-        mkdir -p html
-        cp -r docs/doxygen-awesome-css/* html/doxygen-awesome-css/
+        mkdir -p html/doxygen-awesome-css
+        cp -r docs/doxygen-awesome-css/* html/doxygen-awesome-css
 
     - name: Generate Doxygen Documentation
       run: doxygen docs/Doxyfile
