@@ -1,4 +1,4 @@
-name: Deploy Doxygen Documentation to GutHub Pages
+name: Deploy Doxygen Documentation to GitHub Pages
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   deploy:
     environment:
-      name: github-pages
+      name: Github-Pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
