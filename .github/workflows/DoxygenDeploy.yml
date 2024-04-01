@@ -1,16 +1,25 @@
-name: Deploy Doxygen Documentation
+name: Deploy Doxygen Documentation to GutHub Pages
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
-    permissions:
-        contents: write
 
     steps:
     - uses: actions/checkout@v3
@@ -26,8 +35,14 @@ jobs:
     - name: Generate Doxygen Documentation
       run: doxygen docs/Doxyfile
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./html
+        path: './html'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
