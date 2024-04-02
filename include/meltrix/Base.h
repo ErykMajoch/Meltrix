@@ -7,7 +7,9 @@
 #include <vector>
 #include <utility>
 #include <exception>
+#include <algorithm>
 #include <iostream>
+#include <iomanip>
 
 namespace Meltrix {
 
@@ -22,10 +24,15 @@ namespace Meltrix {
         // Common interfaces
         short rows();
         short columns();
+        bool isEmpty(double delta = 0.001);
 
         // Accessors
         T& operator()(short _row, short _column);
         const T& operator()(short _row, short _column) const;
+
+        // Utility
+        std::pair<short, short> shape();
+        void print(int precision = 5) const;
 
         // Destructor
         virtual ~Base() = default;
