@@ -24,8 +24,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Doxygen
-      run: sudo apt-get install -y doxygen
+    - name: Install Doxygen 1.10.0
+      run: |
+        mkdir -p ~/Downloads/Install_Files/Doxygen
+        cd ~/Downloads/Install_Files/Doxygen
+        wget https://github.com/doxygen/doxygen/releases/download/Release_1_10_0/doxygen-1.10.0.linux.bin.tar.gz
+        tar -xf doxygen-1.10.0.linux.bin.tar.gz
+        cd doxygen-1.10.0
+        sudo make
+        sudo make install
+        doxygen --version
 
     - name: Copy custom CSS
       run: |
