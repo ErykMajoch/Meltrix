@@ -1,4 +1,4 @@
-# CMake Files
+# CMake files
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -11,7 +11,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-# Project Structure
+# Project structure
 /.idea
 /debug
 /release
@@ -20,3 +20,6 @@ _deps
 # Test package
 /test_package/build
 /test_package/CMakeUserPresets.json
+
+# Additional scripts
+update_version.py
