@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <utility>
+#include <exception>
 #include <iostream>
 
 namespace Meltrix {
@@ -22,12 +23,16 @@ namespace Meltrix {
         short rows();
         short columns();
 
+        // Accessors
+        T& operator()(short _row, short _column);
+        const T& operator()(short _row, short _column) const;
+
         // Destructor
         virtual ~Base() = default;
 
     protected:
-        std::size_t m_Rows = 0;
-        std::size_t m_Columns = 0;
+        short m_Rows = 0;
+        short m_Columns = 0;
         std::vector<T> m_Data = {};
     };
 
