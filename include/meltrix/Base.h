@@ -21,6 +21,7 @@ namespace Meltrix {
 
         // Constructors
         Base() = default;
+        Base(const Base<T>& other);
 
         // Common interfaces
         short rows();
@@ -30,6 +31,17 @@ namespace Meltrix {
         // Accessors
         T& operator()(short _row, short _column);
         const T& operator()(short _row, short _column) const;
+
+        // Scalar operations
+        void operator+=(T scalar);
+        void operator-=(T scalar);
+        void operator*=(T scalar);
+        void operator/=(T scalar);
+
+        Base<T> operator+(T scalar) const;
+        Base<T> operator-(T scalar) const;
+        Base<T> operator*(T scalar) const;
+        Base<T> operator/(T scalar) const;
 
         // Utility
         std::pair<short, short> shape();

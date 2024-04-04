@@ -6,6 +6,15 @@
 
 namespace Meltrix {
 
+    // Constructors
+    template <typename T>
+    Base<T>::Base(const Base<T> &other) {
+        m_Rows = other.m_Rows;
+        m_Columns = other.m_Columns;
+        m_Data.resize(other.m_Data.size());
+        m_Data = other.m_Data;
+    }
+
     // Common interfaces
     template <typename T>
     short Base<T>::rows() {
@@ -19,8 +28,7 @@ namespace Meltrix {
 
     template <typename T>
     bool Base<T>::isEmpty(double delta) {
-        std::vector<T> dataCopy = m_Data;
-        return std::all_of(dataCopy.begin(), dataCopy.end(),
+        return std::all_of(m_Data.begin(), m_Data.end(),
            [delta](T i) {return std::abs(i) < delta;}
         );
     }
@@ -40,6 +48,66 @@ namespace Meltrix {
             throw std::out_of_range("Provided dimensions are out of range");
         }
         return m_Data[m_Columns * _row + _column];
+    }
+
+    // Scalar operations
+    template <typename T>
+    void Base<T>::operator+=(T scalar) {
+        std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
+            [scalar] (T value) {return value + scalar;}
+        );
+    }
+
+    template <typename T>
+    void Base<T>::operator-=(T scalar) {
+        std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
+            [scalar] (T value) {return value - scalar;}
+        );
+    }
+
+    template <typename T>
+    void Base<T>::operator*=(T scalar) {
+        std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
+            [scalar] (T value) {return value * scalar;}
+        );
+    }
+
+    template <typename T>
+    void Base<T>::operator/=(T scalar) {
+        if (scalar == static_cast<T>(0)) {
+            throw std::invalid_argument("Cannot divide elements of object by zero");
+        }
+        std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
+                       [scalar] (T value) {return value / scalar;}
+        );
+    }
+
+    template <typename T>
+    Base<T> Base<T>::operator+(T scalar) const {
+        Base<T> result(*this);
+        result += scalar;
+        return result;
+    }
+
+    template <typename T>
+    Base<T> Base<T>::operator-(T scalar) const {
+        Base<T> result(*this);
+        result -= scalar;
+        return result;
+    }
+
+    template <typename T>
+    Base<T> Base<T>::operator*(T scalar) const {
+        Base<T> result(*this);
+        result *= scalar;
+        return result;
+    }
+
+    template <typename T>
+    Base<T> Base<T>::operator/(T scalar) const {
+        Base<T> result(*this);
+        result /= scalar;
+        return result;
     }
 
     // Utility
