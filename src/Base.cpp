@@ -33,6 +33,13 @@ namespace Meltrix {
         );
     }
 
+    template <typename T>
+    void Base<T>::apply(std::function<T(T)> func) {
+        std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
+           func
+        );
+    }
+
     // Accessors
     template <typename T>
     T& Base<T>::operator()(short _row, short _column) {

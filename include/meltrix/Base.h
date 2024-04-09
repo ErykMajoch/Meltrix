@@ -8,6 +8,7 @@
 #include <utility>
 #include <exception>
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -27,6 +28,8 @@ namespace Meltrix {
         short rows();
         short columns();
         bool isEmpty(double delta = 0.001);
+
+        void apply(std::function<T(T)> func);
 
         // Accessors
         T& operator()(short _row, short _column);
