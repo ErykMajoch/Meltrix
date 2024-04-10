@@ -134,14 +134,18 @@ namespace Meltrix {
         columnWidths.front() += 1;
 
         // Print the opening bracket and the first row
-        std::cout << "⎡ ";
+        std::cout << (m_Rows == 1 ? "[ " : "⎡ ");
         for (short col = 0; col < m_Columns; col += 1) {
             std::cout << std::setw(columnWidths[col]) << std::fixed << std::setprecision(precision) << m_Data[col];
             if (col != m_Columns - 1) {
                 std::cout << "  ";
             }
         }
-        std::cout << "  ⎤" << std::endl;
+        std::cout << (m_Rows == 1 ? "  ]" : "  ⎤") << std::endl;
+
+        if (m_Rows == 1) {
+            return;
+        }
 
         // Print the remaining rows
         for (short row = 1; row < m_Rows - 1; row += 1) {
