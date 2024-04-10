@@ -47,7 +47,7 @@ TEST_CASE("Vector class base utilities", "[Vector]") {
         REQUIRE(columns == 4);
     }
 
-    SECTION("Checking accessor operation") {
+    SECTION("Checking accessor operators") {
         float f = v(0, 1);
         REQUIRE_THAT(f, Catch::Matchers::WithinRel(3.1, default_margin));
 
@@ -65,6 +65,34 @@ TEST_CASE("Vector class base utilities", "[Vector]") {
     SECTION("Checking shape function") {
         std::pair<short, short> s = std::make_pair(1, 4);
         REQUIRE(s == v.shape());
+    }
+
+    SECTION("Checking function application") {
+        v.apply([](float x){return std::sin(x);});
+        REQUIRE_THAT(v(0,0), Catch::Matchers::WithinRel(0.808496, default_margin));
+        REQUIRE_THAT(v(0,1), Catch::Matchers::WithinRel(0.0415807, default_margin));
+        REQUIRE_THAT(v(0,2), Catch::Matchers::WithinRel(-0.75876, default_margin));
+        REQUIRE_THAT(v(0,3), Catch::Matchers::WithinRel(-0.753379, default_margin));
+    }
+
+    SECTION("Checking inline scalar operators") {
+        v += 2.0;
+        REQUIRE_THAT(v(0,0), Catch::Matchers::WithinRel(4.2, default_margin));
+        REQUIRE_THAT(v(0,1), Catch::Matchers::WithinRel(5.1, default_margin));
+        REQUIRE_THAT(v(0,2), Catch::Matchers::WithinRel(6.003, default_margin));
+        REQUIRE_THAT(v(0,3), Catch::Matchers::WithinRel(7.43, default_margin));
+    }
+
+    SECTION("Checking returning scalar operators") {
+        Vector<float> b = v - 3.0;
+        REQUIRE_THAT(b(0,0), Catch::Matchers::WithinRel(-0.8, default_margin));
+        REQUIRE_THAT(b(0,1), Catch::Matchers::WithinRel(0.1, default_margin));
+        REQUIRE_THAT(b(0,2), Catch::Matchers::WithinRel(1.003, default_margin));
+        REQUIRE_THAT(b(0,3), Catch::Matchers::WithinRel(2.43, default_margin));
+
+        REQUIRE_THROWS([&](){
+            Vector<float> c = v / 0;
+        }());
     }
 
 }

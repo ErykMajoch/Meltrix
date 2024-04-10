@@ -27,6 +27,36 @@ namespace Meltrix {
         this->m_Data = data;
     }
 
+    // Scalar operations
+    template <typename T>
+    Vector<T> Vector<T>::operator+(T scalar) const {
+        Vector<T> result(*this);
+        result += scalar;
+        return result;
+    }
+
+    template <typename T>
+    Vector<T> Vector<T>::operator-(T scalar) const {
+        Vector<T> result(*this);
+        result -= scalar;
+        return result;
+    }
+
+    template <typename T>
+    Vector<T> Vector<T>::operator*(T scalar) const {
+        Vector<T> result(*this);
+        result *= scalar;
+        return result;
+    }
+
+    template <typename T>
+    Vector<T> Vector<T>::operator/(T scalar) const {
+        Vector<T> result(*this);
+        result /= scalar;
+        return result;
+    }
+
+
 }
 
 

@@ -18,6 +18,12 @@ namespace Meltrix {
         Vector(short rows, short columns);
         Vector(short rows, short columns, std::vector<T> data);
 
+        // Scalar operations
+        Vector<T> operator+(T scalar) const;
+        Vector<T> operator-(T scalar) const;
+        Vector<T> operator*(T scalar) const;
+        Vector<T> operator/(T scalar) const;
+
         // Destructor
         ~Vector() override = default;
 
