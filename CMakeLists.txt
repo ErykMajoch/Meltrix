@@ -10,13 +10,11 @@ enable_testing()
 # List of source files
 set(MELTRIX_SOURCES
     src/Base.cpp
-    src/Vector.cpp
 )
 
 # List of header files
 set(MELTRIX_HEADERS
     include/meltrix/Base.h
-    include/meltrix/Vector.h
 )
 
 # Adding unit tests subdirectory
