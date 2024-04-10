@@ -35,6 +35,10 @@ namespace Meltrix {
         T& operator()(short _row, short _column);
         const T& operator()(short _row, short _column) const;
 
+        // Comparison operators
+        bool operator==(const Base& other);
+        bool operator!=(const Base& other);
+
         // Scalar operations
         void operator+=(T scalar);
         void operator-=(T scalar);

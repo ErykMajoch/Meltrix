@@ -57,6 +57,17 @@ namespace Meltrix {
         return m_Data[m_Columns * _row + _column];
     }
 
+    // Comparison operators
+    template <typename T>
+    bool Base<T>::operator==(const Base<T> &other) {
+        return (m_Rows == other.m_Rows) && (m_Columns == other.m_Columns) && (m_Data == other.m_Data);
+    }
+
+    template <typename T>
+    bool Base<T>::operator!=(const Base<T> &other) {
+        return !operator==(other);
+    }
+
     // Scalar operations
     template <typename T>
     void Base<T>::operator+=(T scalar) {

@@ -4,7 +4,7 @@ from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
 class meltrixRecipe(ConanFile):
     name = "meltrix"
-    version = "0.0.5"
+    version = "0.0.6"
     package_type = "library"
 
     # Optional metadata
@@ -12,7 +12,6 @@ class meltrixRecipe(ConanFile):
     author = "Eryk Majoch"
     url = "https://github.com/ErykMajoch/Meltrix"
     description = "A simple and templated C++ Matrix library"
-    # topics = ("<Put some tag here>", "<here>", "<and here>")
 
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
@@ -20,7 +19,7 @@ class meltrixRecipe(ConanFile):
     default_options = {"shared": False, "fPIC": True}
 
     # Sources are located in the same place as this recipe, copy them to the recipe
-    exports_sources = "CMakeLists.txt", "src/*", "include/meltrix/*"
+    exports_sources = "CMakeLists.txt", "src/*", "include/meltrix/*", "unit_tests/*"
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -39,10 +38,14 @@ class meltrixRecipe(ConanFile):
         tc = CMakeToolchain(self)
         tc.generate()
 
+    def requirements(self):
+        self.test_requires("catch2/3.4.0")
+
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+        cmake.test()
 
     def package(self):
         cmake = CMake(self)

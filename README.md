@@ -42,7 +42,7 @@ conan install .
 
 ```cfg
 [requires]
-meltrix/0.0.5
+meltrix/0.0.6
 [generators]
 CMakeDeps
 CMakeToolchain
