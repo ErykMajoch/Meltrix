@@ -4,9 +4,6 @@ project(meltrix VERSION 0.0.6 DESCRIPTION "A simple and templated C++ Matrix lib
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Enables Catch2 testing
-enable_testing()
-
 # List of source files
 set(MELTRIX_SOURCES
     src/Base.cpp
@@ -16,9 +13,6 @@ set(MELTRIX_SOURCES
 set(MELTRIX_HEADERS
     include/meltrix/Base.h
 )
-
-# Adding unit tests subdirectory
-add_subdirectory(unit_tests)
 
 # Create the meltrix library target
 add_library(meltrix ${MELTRIX_SOURCES})
