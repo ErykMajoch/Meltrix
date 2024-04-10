@@ -26,6 +26,12 @@ TEST_CASE("Vector class initialisation", "[Vector]") {
         }());
     }
 
+    SECTION("Copy constructor") {
+        Vector<int> v = Vector<int>(3, 1, {4, 5, 6});
+        Vector<int> b = v;
+        REQUIRE(b == Vector<int>(3, 1, {4, 5, 6}));
+    }
+
     SECTION("Invalid size initialisation") {
         REQUIRE_THROWS([&](){
             Vector<double> v = Vector<double>(2, 3);
