@@ -53,6 +53,13 @@ TEST_CASE("Vector class base utilities", "[Vector]") {
         REQUIRE(columns == 4);
     }
 
+    SECTION("Checking empty function") {
+        Vector<double> e = Vector<double>(1, 3, {0.009, 0.002, 0.000001});
+        REQUIRE_FALSE(e.isEmpty());
+        REQUIRE(e.isEmpty(0.01));
+
+    }
+
     SECTION("Checking accessor operators") {
         float f = v(0, 1);
         REQUIRE_THAT(f, Catch::Matchers::WithinRel(3.1, default_margin));
@@ -99,6 +106,23 @@ TEST_CASE("Vector class base utilities", "[Vector]") {
         REQUIRE_THROWS([&](){
             Vector<float> c = v / 0;
         }());
+    }
+
+}
+
+TEST_CASE("Testing Vector class utilities") {
+    using namespace Meltrix;
+
+    SECTION("Zero initialiser") {
+        Vector<int> m = Vector<int>::Zero(1,2);
+        REQUIRE(m(0,0) == 0);
+        REQUIRE(m(0,1) == 0);
+    }
+
+    SECTION("Zero initialiser") {
+        Vector<int> m = Vector<int>::One(2,1);
+        REQUIRE(m(0,0) == 1);
+        REQUIRE(m(1,0) == 1);
     }
 
 }

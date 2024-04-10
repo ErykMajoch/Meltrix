@@ -27,6 +27,21 @@ namespace Meltrix {
         this->m_Data = data;
     }
 
+    // Special initialisers
+    template <typename T>
+    Vector<T> Vector<T>::Zero(short rows, short columns) {
+        Vector<T> result(rows, columns);
+        std::fill(result.m_Data.begin(), result.m_Data.end(), static_cast<T>(0));
+        return result;
+    }
+
+    template <typename T>
+    Vector<T> Vector<T>::One(short rows, short columns) {
+        Vector<T> result(rows, columns);
+        std::fill(result.m_Data.begin(), result.m_Data.end(), static_cast<T>(1));
+        return result;
+    }
+
     // Scalar operations
     template <typename T>
     Vector<T> Vector<T>::operator+(T scalar) const {

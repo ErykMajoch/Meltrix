@@ -18,6 +18,10 @@ namespace Meltrix {
         Vector(short rows, short columns);
         Vector(short rows, short columns, std::vector<T> data);
 
+        // Special initialisers
+        static Vector<T> Zero(short rows, short columns);
+        static Vector<T> One(short rows, short columns);
+
         // Scalar operations
         Vector<T> operator+(T scalar) const;
         Vector<T> operator-(T scalar) const;
