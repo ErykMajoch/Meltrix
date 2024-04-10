@@ -45,11 +45,6 @@ namespace Meltrix {
         void operator*=(T scalar);
         void operator/=(T scalar);
 
-        Base<T> operator+(T scalar) const;
-        Base<T> operator-(T scalar) const;
-        Base<T> operator*(T scalar) const;
-        Base<T> operator/(T scalar) const;
-
         // Utility
         std::pair<short, short> shape();
         void print(int precision = 5) const;

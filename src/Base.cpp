@@ -60,7 +60,19 @@ namespace Meltrix {
     // Comparison operators
     template <typename T>
     bool Base<T>::operator==(const Base<T> &other) {
-        return (m_Rows == other.m_Rows) && (m_Columns == other.m_Columns) && (m_Data == other.m_Data);
+        if (m_Data.size() != other.m_Data.size()) {
+            return false;
+        }
+
+        bool margin_data = true;
+        for (int i = 0; i < m_Data.size(); i++) {
+            if (std::abs(m_Data[i] - other.m_Data[i]) > 0.001) {
+                margin_data = false;
+                break;
+            }
+        }
+
+        return (m_Rows == other.m_Rows) && (m_Columns == other.m_Columns) && margin_data;
     }
 
     template <typename T>
@@ -98,34 +110,6 @@ namespace Meltrix {
         std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(),
                        [scalar] (T value) {return value / scalar;}
         );
-    }
-
-    template <typename T>
-    Base<T> Base<T>::operator+(T scalar) const {
-        Base<T> result(*this);
-        result += scalar;
-        return result;
-    }
-
-    template <typename T>
-    Base<T> Base<T>::operator-(T scalar) const {
-        Base<T> result(*this);
-        result -= scalar;
-        return result;
-    }
-
-    template <typename T>
-    Base<T> Base<T>::operator*(T scalar) const {
-        Base<T> result(*this);
-        result *= scalar;
-        return result;
-    }
-
-    template <typename T>
-    Base<T> Base<T>::operator/(T scalar) const {
-        Base<T> result(*this);
-        result /= scalar;
-        return result;
     }
 
     // Utility
