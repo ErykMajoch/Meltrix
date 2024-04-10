@@ -1,3 +1,4 @@
+# Get Catch2
 find_package(Catch2 3 QUIET)
 
 if (NOT ${Catch2_FOUND})
@@ -11,13 +12,15 @@ if (NOT ${Catch2_FOUND})
     FetchContent_MakeAvailable(Catch2)
 endif()
 
-add_executable(unit_tests
-    main.cpp
+# Set test sources
+set(TEST_SOURCES
+    VectorTests.cpp
 )
 
-target_link_libraries(unit_tests PRIVATE meltrix Catch2::Catch2WithMain)
-
-add_test(
-    NAME meltrix_unit_tests
-    COMMAND unit_tests
-)
+# Create tests for each file
+foreach(test ${TEST_SOURCES})
+    get_filename_component(testName ${test} NAME_WE)
+    add_executable(${testName} ${test})
+    target_link_libraries(${testName} PRIVATE meltrix Catch2::Catch2WithMain)
+    add_test(NAME ${testName} COMMAND ${testName})
+endforeach(test)

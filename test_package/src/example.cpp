@@ -1,12 +1,5 @@
-#include <meltrix/meltrix.h>
-#include <vector>
-#include <string>
+#include <meltrix/Vector.h>
 
 int main() {
-    meltrix();
-
-    std::vector<std::string> vec;
-    vec.push_back("test_package");
-
-    meltrix_print_vector(vec);
+    using namespace Meltrix;
 }

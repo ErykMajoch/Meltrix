@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
-project(meltrix VERSION 0.1.0 DESCRIPTION "A simple and templated C++ Matrix library" LANGUAGES CXX)
+project(meltrix VERSION 0.1.1 DESCRIPTION "A simple and templated C++ Matrix library" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Enables Catch2 testing
+enable_testing()
 
 # List of source files
 set(MELTRIX_SOURCES
@@ -15,6 +18,9 @@ set(MELTRIX_HEADERS
     include/meltrix/Base.h
     include/meltrix/Vector.h
 )
+
+# Adding unit tests subdirectory
+add_subdirectory(unit_tests)
 
 # Create the meltrix library target
 add_library(meltrix ${MELTRIX_SOURCES})
