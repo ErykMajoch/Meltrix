@@ -44,36 +44,99 @@ namespace Meltrix {
 
     // Scalar operations
     template <typename T>
+    void Vector<T>::operator+=(T scalar) {
+        Base<T>::operator+=(scalar);
+    }
+
+    template <typename T>
+    void Vector<T>::operator-=(T scalar) {
+        Base<T>::operator-=(scalar);
+    }
+
+    template <typename T>
+    void Vector<T>::operator*=(T scalar) {
+        Base<T>::operator*=(scalar);
+    }
+
+    template <typename T>
+    void Vector<T>::operator/=(T scalar) {
+        Base<T>::operator/=(scalar);
+    }
+
+    template <typename T>
     Vector<T> Vector<T>::operator+(T scalar) const {
         Vector<T> result(*this);
-        result += scalar;
+        result.operator+(scalar);
         return result;
     }
 
     template <typename T>
     Vector<T> Vector<T>::operator-(T scalar) const {
         Vector<T> result(*this);
-        result -= scalar;
+        result.operator-=(scalar);
         return result;
     }
 
     template <typename T>
     Vector<T> Vector<T>::operator*(T scalar) const {
         Vector<T> result(*this);
-        result *= scalar;
+        result.operator*=(scalar);
         return result;
     }
 
     template <typename T>
     Vector<T> Vector<T>::operator/(T scalar) const {
         Vector<T> result(*this);
-        result /= scalar;
+        result.operator/=(scalar);
         return result;
     }
 
+    // Vector operations
+    template <typename T>
+    Vector<T> Vector<T>::operator+(const Vector<T>& other) {
+        if (!(this->m_Rows == other.m_Rows && this->m_Columns == other.m_Columns)) {
+            throw std::invalid_argument("Vector dimensions don't match");
+        }
+        Vector<T> result(*this);
+        for (int i = 0; i < this->m_Data.size(); i++) {
+            result.m_Data[i] += other.m_Data[i];
+        }
+        return result;
+    }
+
+    template <typename T>
+    Vector<T> Vector<T>::operator-(const Vector<T>& other) {
+        if (!(this->m_Rows == other.m_Rows && this->m_Columns == other.m_Columns)) {
+            throw std::invalid_argument("Vector dimensions don't match");
+        }
+        Vector<T> result(*this);
+        for (int i = 0; i < this->m_Data.size(); i++) {
+            result.m_Data[i] -= other.m_Data[i];
+        }
+        return result;
+    }
+
+    template <typename T>
+    void Vector<T>::operator+=(const Vector<T> &other) {
+        if (!(this->m_Rows == other.m_Rows && this->m_Columns == other.m_Columns)) {
+            throw std::invalid_argument("Vector dimensions don't match");
+        }
+        for (int i = 0; i < this->m_Data.size(); i++) {
+            this->m_Data[i] += other.m_Data[i];
+        }
+    }
+
+    template <typename T>
+    void Vector<T>::operator-=(const Vector<T> &other) {
+        if (!(this->m_Rows == other.m_Rows && this->m_Columns == other.m_Columns)) {
+            throw std::invalid_argument("Vector dimensions don't match");
+        }
+        for (int i = 0; i < this->m_Data.size(); i++) {
+            this->m_Data[i] -= other.m_Data[i];
+        }
+    }
 
 }
-
 
 // Explicit instantiation as a workaround for breaking up the definitions
 template class Meltrix::Vector<int>;

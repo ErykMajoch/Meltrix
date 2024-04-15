@@ -113,16 +113,62 @@ TEST_CASE("Vector class base utilities", "[Vector]") {
 TEST_CASE("Testing Vector class utilities") {
     using namespace Meltrix;
 
-    SECTION("Zero initialiser") {
+    SECTION("Checking zero initialiser") {
         Vector<int> m = Vector<int>::Zero(1,2);
         REQUIRE(m(0,0) == 0);
         REQUIRE(m(0,1) == 0);
     }
 
-    SECTION("Zero initialiser") {
+    SECTION("Checking one initialiser") {
         Vector<int> m = Vector<int>::One(2,1);
         REQUIRE(m(0,0) == 1);
         REQUIRE(m(1,0) == 1);
+    }
+
+    SECTION("Checking inline vector arithmetic operators") {
+        Vector<int> a = Vector<int>(1, 4, {6, 2, 1, 3});
+        REQUIRE_NOTHROW([&](){
+            Vector<int> b = Vector<int>(1, 4, {6, 10, 2, 4});
+            a += b;
+            REQUIRE(a == Vector<int>(1, 4, {12, 12, 3, 7}));
+        }());
+        REQUIRE_THROWS([&](){
+            Vector<int> c = Vector<int>(4, 1, {1, 2, 3, 4});
+            a += c;
+        }());
+
+        a = Vector<int>(4, 1, {6, 2, 1, 3});
+        REQUIRE_NOTHROW([&](){
+            Vector<int> d = Vector<int>(4, 1, {6, 10, 2, 4});
+            a -= d;
+            REQUIRE(a == Vector<int>(4, 1, {0, -8, -1, -1}));
+        }());
+        REQUIRE_THROWS([&](){
+            Vector<int> e = Vector<int>(1, 4, {1, 1, 1, 1});
+            a -= e;
+        }());
+    }
+
+    SECTION("Checking returning vector arithmetic operators") {
+        Vector<double> v = Vector<double>(1,2, {0.2, 1.4});
+        REQUIRE_NOTHROW([&](){
+            Vector<double> a = Vector<double>(1, 2, {1.2, 0.6});
+            Vector<double> r = v + a;
+            REQUIRE(r == Vector<double>(1,2, {1.4, 2.0}));
+        }());
+        REQUIRE_THROWS([&](){
+            Vector<double> b = Vector<double>(2, 1, {0.1, 2.4});
+            Vector<double> r = v + b;
+        }());
+        REQUIRE_NOTHROW([&](){
+            Vector<double> c = Vector<double>(1, 2, {0.1, 0.4});
+            Vector<double> r = v - c;
+            REQUIRE(r == Vector<double>(1, 2, {0.1, 1.0}));
+        }());
+        REQUIRE_THROWS([&](){
+            Vector<double> d = Vector<double>(2, 1, {0.2, 1.1});
+            Vector<double> r = v - d;
+        }());
     }
 
 }

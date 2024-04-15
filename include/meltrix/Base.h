@@ -40,10 +40,10 @@ namespace Meltrix {
         bool operator!=(const Base& other);
 
         // Scalar operations
-        void operator+=(T scalar);
-        void operator-=(T scalar);
-        void operator*=(T scalar);
-        void operator/=(T scalar);
+        virtual void operator+=(T scalar);
+        virtual void operator-=(T scalar);
+        virtual void operator*=(T scalar);
+        virtual void operator/=(T scalar);
 
         // Utility
         std::pair<short, short> shape();
